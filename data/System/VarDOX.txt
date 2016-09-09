@@ -1,0 +1,31 @@
+%META:TOPICPARENT{name="DoxygenPlugin"}%
+#VarDOX
+---+++ DOX{...} -- renders a URL for a Doxygen class diagram
+   * Parameters:
+      | *Parameter* | *Description* | *Default* |
+      |             | Name of structure to link to | none, required parameter |
+      | subdir      | A simple subdirectory from the root | no subdirectory |
+      | subdirs     | Equivalent to CREATE_SUBDIRS parameter to Doxygen | DOXYGENPLUGIN_CREATE_SUBDIRS preference setting |
+      | casesense   | Equivalent to CASE_SENSE_NAMES parameter to Doxygen | DOXYGENPLUGIN_CASE_SENSE_NAMES preference setting |
+      | stype       | Structure type, e.g. "class", "struct", "union", etc. | class |
+      | extension   | File extension for Doxygen document. | .html |
+
+This macro renders to a simple text string that is the concatenation of the following elements:
+   * =$Foswiki::cfg{Plugins}{DoxygenPlugin}{Root}=
+   * =subdir=
+   * =stype=
+   * _DEFAULT_ (this is the unnamed argument to the macro)
+   * =extension=
+
+*Note:* For security reasons, =subdir= only allows alphanumeric characters and underlines.  This helps prevent malicious URLs from being generated.
+
+*Note:* The URL is processed through the Doxygen character escaping algorithm, which replaces potentially problematic characters with coded text.
+
+An example:
+<verbatim>%DOX{"std::string" subdirs="1" subdir="stdcpp" casesense="0" stype="class"}%</verbatim>
+
+Would generate (with the "Root" configuration item unset):
+<verbatim>/stdcpp/d8/d29/classstd_1_1string.html</verbatim>
+
+or, with the Root set to "<nop>http://www.google.com":
+<verbatim>http://www.google.com/stdcpp/d8/d29/classstd_1_1string.html</verbatim>

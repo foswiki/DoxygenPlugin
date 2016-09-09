@@ -1,0 +1,104 @@
+%META:TOPICINFO{author="ProjectContributor" date="1426275622" format="1.1" version="1"}%
+%META:TOPICPARENT{name="Plugins"}%
+---+!! Doxygen Plugin
+<!--
+One line description, required for extensions repository catalog.
+   * Set SHORTDESCRIPTION = Plugin containing for linking to Doxygen-generated diagrams
+-->
+
+%SHORTDESCRIPTION%
+
+%TOC%
+
+---++ Plugin Preferences
+
+%X% *Note: This plugin does not read settings from this topic.*  Copy the settings below to your %USERSWEB%.SitePreferences topic and remove the # if changes are required.  These settings can be placed in %USERSWEB%.SitePreferences, WebPreferences, User topics, or any individual topic.  Refer to [[%SYSTEMWEB%.PreferenceSettings][preference settings]] for more information.
+
+<verbatim>
+   * #Set DOXYGENPLUGIN_CREATE_SUBDIRS = 0
+   * #Set DOXYGENPLUGIN_CASE_SENSE_NAMES = 0
+</verbatim>
+
+---+++ Description of the settings
+
+*All settings are prefixed with =DOXYGENPLUGIN_= as shown above*  _The prefix is ommited from this table to improve layout._
+
+The settings that appear here are meant to be set the same as the Doxygen configuration used to produce the files being linked to.  Only settings relevant to the generation of output files are supported.
+
+*Note:* Doxygen documentation generated with SHORT_NAMES enabled can not be supported by this plugin as those names are generated using a counter that can't reliably be reproduced outside of =doxygen=.
+
+|    *Setting*     | *Default* | *Description* |
+| CREATE_SUBDIRS   | 0         | Matches the setting of the same name in the Doxyfile configuration for Doxygen, i.e. a subdirectory hash is used to spread the output files out. |
+| CASE_SENSE_NAMES | 0         | Matches the setting of the same name in the Doxyfile configuration for Doxygen, i.e. a subdirectory hash is used to spread the output files out. |
+
+---++ Macros
+
+%INCLUDE{VarDOX}%
+%INCLUDE{VarDOXYDOT}%
+
+---++ Configuration Settings
+
+The following settings can be defined in configure (admin interface):
+
+| *Setting* | *Description* | *Default* |
+| {Plugins}{DoxygenPlugin}{Root} | The top-level URL for the Doxygen documents | none (blank) |
+
+See DOXYDOT above for an explanation as to how this is used.
+
+---++ Plugin Installation Instructions
+You do not need to install anything in the browser to use this extension. The following instructions are for the administrator who installs the extension on the server.
+
+---+++ Installation
+Open configure, and open the "Extensions" section. Use "Find More Extensions" to get a list of available extensions. Select "Install".
+
+If you have any problems, or if the extension isn't available in =configure=, then you can still install manually from the command-line. See http://foswiki.org/Support/ManuallyInstallingExtensions for more help.
+
+---+++ Dependencies
+This plug-in does not require any additional modules or tools beyond the base Foswiki install and core Perl packages, however, the plug-in is not useful unless you are generating Doxygen documentation and making it available via the web.
+
+Linking to !PlantUML diagrams requires an updated Doxygen.  Support for auto-generated !PlantUML diagrams has not yet been integrated as of Doxygen 1.8.10.  Please see the attached patch files if this function is desired.  To apply the patch and build Doxygen, do the following for 1.8.9.1:
+<pre>
+[/tmp]$ tar -xzf doxygen-1.8.9.1.src.tar.gz
+[/tmp]$ cd doxygen-1.8.9.1
+[/tmp]$ patch -p1 <../doxygen-1.8.9.1-table-plantuml.patch
+[/tmp/doxygen-1.8.9.1]$ ./configure --prefix /usr/local
+[/tmp/doxygen-1.8.9.1]$ make
+[/tmp/doxygen-1.8.9.1]$ sudo make install
+[/tmp/doxygen-1.8.9.1]$ cd ..
+[/tmp]$ rm -rf doxygen-1.8.9.1
+</pre> 
+
+or for 1.8.10:
+<pre>
+[/tmp]$ tar xzvf doxygen-1.8.10.src.tar.gz
+[/tmp]$ cd doxygen-1.8.10
+[/tmp/doxygen-1.8.10]$ patch -p1 <../doxygen-1.8.10-table-plantuml.patch 
+</pre>
+The remaining steps are taken from http://www.doxygen.com/install.html (consult this page for building instructions for other platforms).
+<pre>
+[/tmp/doxygen-1.8.10]$ mkdir build
+[/tmp/doxygen-1.8.10]$ cd build
+[/tmp/doxygen-1.8.10]$ cmake -G "Unix Makefiles" ..
+[/tmp/doxygen-1.8.10]$ make
+[/tmp/doxygen-1.8.10]$ sudo make install
+</pre>
+
+---++ Plugin Info
+
+|  Change&nbsp;History: | <!-- versions below in reverse order -->&nbsp; |
+|  13 Aug 2015 | 1.0.0 Initial release |
+
+
+
+%META:FORM{name="PackageForm"}%
+%META:FIELD{name="Author" title="Author" value="Foswiki:Main.JohnKnutson"}%
+%META:FIELD{name="Version" title="Version" value="v1.0.0"}%
+%META:FIELD{name="Release" title="Release" value="1.0.0"}%
+%META:FIELD{name="Repository" title="Repository" value="https://github.com/foswiki/DoxygenPlugin"}%
+%META:FIELD{name="Copyright" title="Copyright" value="&copy; 2015, Applied Research Laboratories, the University of Texas at Austin"}%
+%META:FIELD{name="License" title="License" value="[[%25ATTACHURLPATH%25/COPYING.txt][GPLv3]]"}%
+%META:FIELD{name="Home" title="Home" value="http://foswiki.org/Extensions/DoxygenPlugin"}%
+%META:FIELD{name="Support" title="Support" value="http://foswiki.org/Support/DoxygenPlugin"}%
+%META:FILEATTACHMENT{name="COPYING.txt" attachment="COPYING.txt" attr="" comment="GNU General Public License v3" date="1417819886" path="COPYING.txt" size="35147" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="doxygen-1.8.9.1-table-plantuml.patch" attachment="doxygen-1.8.9.1-table-plantuml.patch" attr="" comment="Add support for mark-down table cell spans and PlantUML class diagrams to Doxygen 1.8.9.1" date="1417819886" path="doxygen-1.8.9.1-table-plantuml.patch" size="131085" user="ProjectContributor" version="1"}%
+%META:FILEATTACHMENT{name="doxygen-1.8.10-table-plantuml.patch" attachment="doxygen-1.8.10-table-plantuml.patch" attr="" comment="Add support for mark-down table cell spans and PlantUML class diagrams to Doxygen 1.8.10" date="1417819886" path="doxygen-1.8.10-table-plantuml.patch" size="" user="ProjectContributor" version="1"}%

@@ -1,0 +1,10 @@
+data/System/DoxygenPlugin.txt 0664
+data/System/VarDOX.txt 0664
+data/System/VarDOXYDOT.txt 0444
+lib/Foswiki/Plugins/DoxygenPlugin.pm 0664
+lib/Foswiki/Plugins/DoxygenPlugin/Config.spec 0444
+pub/System/DoxygenPlugin/COPYING.txt 0444
+pub/System/DoxygenPlugin/doxygen-1.8.10-table-plantuml.patch 0444
+pub/System/DoxygenPlugin/doxygen-1.8.9.1-table-plantuml.patch 0444
+test/unit/DoxygenPlugin/DoxygenPluginSuite.pm 0444
+test/unit/DoxygenPlugin/DoxygenPluginTests.pm 0444
